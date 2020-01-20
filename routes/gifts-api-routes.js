@@ -14,16 +14,11 @@ module.exports = (app)=>{
 				  	$("div.inset").each(function(i, element) {
 				    	let size = $(element).children("div.title").text(), price = $(element).children("div.subtitle").text();
 				    	if (size == object.size) {
-				    		
 				    		price = parseFloat(price.substr(1));
 				    		object.sortPrice = price;
 							object.listPrice = "$" + price + " + s&h";
-							
 							scrapeArr = scrapeArr.filter(e => e !== object.name);
-							if (!scrapeArr.length) { 
-								res.send(giftsArr); 
-							};
-				  			
+							if (!scrapeArr.length) { res.send(giftsArr); };
 				  			console.log("price found for " + object.name);
 				  			console.log("$" + price);
 				      		return false;

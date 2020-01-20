@@ -1,12 +1,9 @@
 $(function(){
 
-	let giftsArr = [];
-
 	function getGifts() {
 		console.log("gifts request sent");
 		$.get("/api/gifts", (res)=>{ 
-			giftsArr = res;
-			displayGifts(giftsArr);
+			displayGifts(quickSort(res));
 		});
 	}
 
@@ -42,30 +39,15 @@ $(function(){
 		}
 	}
 
+	function quickSort(origArr) {
+		if (origArr.length <= 1) { return origArr; } 
+		else {
+			let left = [], right = [], newArray = [], pivot = origArr.pop(), length = origArr.length;
+			for (let i = 0; i < length; i++) { origArr[i].sortPrice <= pivot.sortPrice ? left.push(origArr[i]) : right.push(origArr[i]); }
+			return newArray.concat(quickSort(left), pivot, quickSort(right));
+		}
+	}
+
 	getGifts();
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
