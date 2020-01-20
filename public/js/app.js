@@ -6,34 +6,8 @@ $(function(){
 		$.get("/api/gifts", (res)=>{ 
 			console.log("gifts request sent");
 			giftsArr = res;
-			scrapePrice(giftsArr);
+			displayGifts(giftsArr);
 		});
-	}
-
-	function scrapePrice(arr) {
-		let scrapeArr = [];
-		for (let object of arr) {
-			if(object.scrape) {
-				let data = {
-					url: object.link,
-					size: object.size,
-					name: object.name
-				}
-				scrapeArr.push(object.name);
-				$.post("/api/scrape", data, (res)=>{
-					console.log("scrape request sent");
-			  		if (!res) alert("Failure");
-					else console.log(res);
-					object.sortPrice = res[0].price;
-					object.listPrice = "$" + res[0].price + " + s&h";
-					console.log(object);
-					scrapeArr = scrapeArr.filter(e => e !== object.name)
-					if (!scrapeArr.length) {
-						displayGifts(giftsArr);
-					}
-				});
-			}
-		}
 	}
 
 	function displayGifts(arr) {
