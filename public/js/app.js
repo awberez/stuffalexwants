@@ -3,8 +3,8 @@ $(function(){
 	let giftsArr = [];
 
 	function getGifts() {
+		console.log("gifts request sent");
 		$.get("/api/gifts", (res)=>{ 
-			console.log("gifts request sent");
 			giftsArr = res;
 			displayGifts(giftsArr);
 		});
