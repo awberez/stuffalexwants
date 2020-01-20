@@ -1,2 +1,2 @@
 # stuffalexwants
-A digital parody of a Christmas list.
+A digital parody of a Holiday/Birthday/whenever wishlist.
