@@ -1,0 +1,115 @@
+body {
+	background-image: url(../images/paper_@2X.png);
+	font-family: 'Overpass', sans-serif;
+	max-height: 100vh;
+}
+
+.giftHeader {
+	font-size: 30px;
+	font-family: 'Courier Prime', monospace;
+}
+
+.startBtn {
+	margin-top: 20px;
+}
+
+.signature {
+	font-family: 'Beth Ellen', cursive;
+	font-size: 40px;
+}
+
+.stuffHeader {
+	font-family: 'Bree Serif', serif;
+}
+
+.giftObject{ 
+	padding: 10px;
+}
+
+.catTitle {
+	padding-bottom: 30px;
+}
+
+.giftImage {
+	height: 300px;
+	border: solid black 1px;
+}
+
+#mainNav {
+	background-color: rgb(22, 19, 56);
+}
+
+#footerBar {
+	background-color: rgb(22, 19, 56);
+}
+
+#home {
+	padding-top: 80px;
+	padding-bottom: 30px;
+	min-height: 100vh;
+}
+
+#budget, #good, #high, #big {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+#budget {
+	background-color: rgb(187, 213, 242, 0.4);
+}
+
+#good {
+	background-color: rgb(124, 152, 214, 0.4);
+}
+
+#high {
+	background-color: rgb(187, 213, 242, 0.4);
+}
+
+#big {
+	background-color: rgb(124, 152, 214, 0.4);
+}
+
+.awbLogo {
+	height: 20px;
+	padding-left: 20px;
+	opacity: 0.35;
+	filter: invert(1);
+}
+
+.logoText {
+	font-family: 'Satisfy', cursive;
+	opacity: 0.35;
+	color: white;
+}
+
+.logoDiv {
+	margin-top: -10px;
+	margin-left: 20px;
+	float: left;
+}
+
+.main-btn{ background:#428bca; border-color:#428bca; color:#fff;}
+
+.main-btn:hover{ background:#205b8e; color:#fff;}
+
+.row {
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+@media (max-width: 991px) {
+
+	.giftHeader {
+		font-size: 26px;
+	}
+
+}
+
+@media (max-width: 767.98px) {
+
+	.giftHeader {
+		font-size: 22px;
+	}
+
+}
