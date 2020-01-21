@@ -89,9 +89,9 @@ body {
 	float: left;
 }
 
-.main-btn{ background:#428bca; border-color:#428bca; color:#fff;}
+.main-btn{ background:#ca4242; border-color:#ca4242; color:#fff;}
 
-.main-btn:hover{ background:#205b8e; color:#fff;}
+.main-btn:hover{ background:#8e2020; color:#fff;}
 
 .row {
   padding-right: 0px;
