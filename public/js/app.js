@@ -42,9 +42,9 @@ $(function(){
 	function quickSort(origArr) {
 		if (origArr.length <= 1) { return origArr; } 
 		else {
-			let left = [], right = [], newArray = [], pivot = origArr.pop(), length = origArr.length;
+			let left = [], right = [], newArr = [], pivot = origArr.pop(), length = origArr.length;
 			for (let i = 0; i < length; i++) { origArr[i].sortPrice <= pivot.sortPrice ? left.push(origArr[i]) : right.push(origArr[i]); }
-			return newArray.concat(quickSort(left), pivot, quickSort(right));
+			return newArr.concat(quickSort(left), pivot, quickSort(right));
 		}
 	}
 
