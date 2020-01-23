@@ -2,9 +2,7 @@ $(function(){
 
 	function getGifts() {
 		console.log("gifts request sent");
-		$.get("/api/gifts", (res)=>{ 
-			displayGifts(quickSort(res));
-		});
+		$.get("/api/gifts", (res)=>{ displayGifts(quickSort(res)); });
 	}
 
 	function displayGifts(arr) {
@@ -13,24 +11,24 @@ $(function(){
 		$("#goodContent").empty();
 		$("#highContent").empty();
 		$("#bigContent").empty();
-		for (let object of arr) {
-			$(object.sortPrice <= 15 
+		for (let gift of arr) {
+			$(gift.sortPrice <= 15 
 				? "#budgetContent" 
-				: object.sortPrice <= 50
+				: gift.sortPrice <= 50
 					? "#goodContent"
-					: object.sortPrice <= 150
+					: gift.sortPrice <= 150
 						? "#highContent"
 						: "#bigContent")
 			.append(`
-				<div id=gift${object.index} class="giftObject">
+				<div id=gift${gift.index} class="giftObject">
 					<div class="row">
 						<div class="col-lg-8">
-							<h4>${object.name}</h4>
-							<h5>${object.listPrice} - <a href=${object.link} target="blank">Available here</a></h5>
+							<h4>${gift.name}</h4>
+							<h5>${gift.listPrice} - <a href=${gift.link} target="blank">Available here</a></h5>
 						</div>
 						<div class="col-lg-4">
-							<a href=${object.link} target="blank">
-								<img src=${object.image} class="giftImage" alt=${object.name}/>
+							<a href=${gift.link} target="blank">
+								<img src=${gift.image} class="giftImage" alt=${gift.name}/>
 							</a>
 						</div>
 					</div>

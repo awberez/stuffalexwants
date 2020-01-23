@@ -113,3 +113,27 @@ body {
 	}
 
 }
+
+@media (max-height: 930px) {
+
+	.giftHeader {
+		font-size: 26px;
+	}
+
+}
+
+@media (max-height: 830px) {
+
+	.giftHeader {
+		font-size: 24px;
+	}
+
+}
+
+@media (max-height: 730px) {
+
+	.giftHeader {
+		font-size: 22px;
+	}
+
+}
