@@ -7,18 +7,17 @@ $(function(){
 
 	function displayGifts(arr) {
 		console.log("displaying gifts")
-		$("#budgetContent").empty();
-		$("#goodContent").empty();
-		$("#highContent").empty();
-		$("#bigContent").empty();
+		$("#budgetContent, #goodContent, #highContent, #bigContent, #grailContent").empty();
 		for (let gift of arr) {
-			$(gift.sortPrice <= 15 
+			$(gift.sortPrice <= 25 
 				? "#budgetContent" 
-				: gift.sortPrice <= 50
+				: gift.sortPrice <= 75
 					? "#goodContent"
-					: gift.sortPrice <= 150
+					: gift.sortPrice <= 250
 						? "#highContent"
-						: "#bigContent")
+						: gift.sortPrice <= 750
+							? "#bigContent"
+							: "#grailContent")
 			.append(`
 				<div id=gift${gift.index} class="giftObject">
 					<div class="row">

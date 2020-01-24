@@ -49,24 +49,16 @@ body {
 	min-height: 100vh;
 }
 
-#budget, #good, #high, #big {
+#budget, #good, #high, #big, #grail {
 	padding-top: 50px;
 	padding-bottom: 50px;
 }
 
-#budget {
+#budget, #high, #grail {
 	background-color: rgb(187, 213, 242, 0.4);
 }
 
-#good {
-	background-color: rgb(124, 152, 214, 0.4);
-}
-
-#high {
-	background-color: rgb(187, 213, 242, 0.4);
-}
-
-#big {
+#good, #big {
 	background-color: rgb(124, 152, 214, 0.4);
 }
 
