@@ -85,10 +85,10 @@ module.exports = [
 			link: "https://rebeccaguaymtgartstore.weebly.com/store/p60/Dark_Ritual.html",
 			sortPrice: 90,
 			listPrice: "$90"},
-		{name: `Hunt for the Fire Wurm Canvas Print (16"x28")`, 
-			image: "./images/firewurm.jpg", 
-			link: "https://www.inprnt.com/gallery/sebmckinnon/hunt-for-the-fire-wurm/canvas/",
-			sortPrice: 150,
-			listPrice: "$150 + s&h"},
+		{name: `Brandon Sanderson Leather-bound Book (Any Title)`, 
+			image: "./images/leatherbook.jpg", 
+			link: "https://store.brandonsanderson.com/search.php?mode=1&search_query_adv=leather-bound%20book&brand=&searchsubs=ON&price_from=100&price_to=100&featured=&shipping=&category%5B%5D=19&section=product",
+			sortPrice: 100,
+			listPrice: "$100 + s&h"},
 
 	]

@@ -1,12 +1,23 @@
 $(function(){
 
+	let apiDelay;
+
 	function getGifts() {
 		console.log("gifts request sent");
-		$.get("/api/gifts", (res)=>{ displayGifts(quickSort(res)); });
+		apiDelay = setTimeout(function(){ 
+			$("#budgetContent, #goodContent, #highContent, #bigContent, #grailContent").html(`<p>Experiencing abnormal delays retrieving content...</p>`);
+			apiDelay = setTimeout(function(){ 
+				$("#budgetContent, #goodContent, #highContent, #bigContent, #grailContent").html(`<p>Please refresh your browser or try visiting StuffAlexWants.com at a later time.</p>`);
+			}, 10000);
+		}, 5000);
+		$.get("/api/gifts", (res)=>{ 
+			clearTimeout(apiDelay);
+			displayGifts(quickSort(res)); 
+		});
 	}
 
 	function displayGifts(arr) {
-		console.log("displaying gifts")
+		console.log(`displaying ${arr.length} gifts`)
 		$("#budgetContent, #goodContent, #highContent, #bigContent, #grailContent").empty();
 		for (let gift of arr) {
 			$(gift.sortPrice <= 25 
