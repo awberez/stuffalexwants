@@ -2,13 +2,11 @@ $(function(){
 
 	let apiDelay, contentDivs = "#budgetContent, #goodContent, #highContent, #bigContent, #grailContent";
 
-	function getGifts() {
+	getGifts = ()=>{
 		console.log("gifts request sent");
-		apiDelay = setTimeout(function(){ 
+		apiDelay = setTimeout(()=>{ 
 			$(contentDivs).html(`<p>Experiencing abnormal delays retrieving content...</p>`);
-			apiDelay = setTimeout(function(){ 
-				$(contentDivs).html(`<p>Please refresh your browser or try visiting StuffAlexWants.com at a later time.</p>`);
-			}, 10000);
+			apiDelay = setTimeout(()=>{ $(contentDivs).html(`<p>Please refresh your browser or try visiting StuffAlexWants.com at a later time.</p>`); }, 10000);
 		}, 5000);
 		$.get("/api/gifts", (res)=>{ 
 			clearTimeout(apiDelay);
@@ -16,7 +14,7 @@ $(function(){
 		});
 	}
 
-	function displayGifts(arr) {
+	displayGifts = (arr)=>{
 		console.log(`displaying ${arr.length} gifts`)
 		$(contentDivs).empty();
 		for (let gift of arr) {
@@ -47,7 +45,7 @@ $(function(){
 		}
 	}
 
-	function quickSort(origArr) {
+	quickSort = (origArr)=>{
 		if (origArr.length <= 1) { return origArr; } 
 		else {
 			let left = [], right = [], newArr = [], pivot = origArr.pop(), length = origArr.length;

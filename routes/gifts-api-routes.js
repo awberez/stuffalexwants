@@ -3,27 +3,26 @@ customHeaderRequest = request.defaults({ headers: {'User-Agent': 'Mozilla/5.0 (W
 
 module.exports = (app)=>{
 
-	app.get("/api/gifts", function(req, res) {
+	app.get("/api/gifts", (req, res)=>{
 		console.log("gifts request received");
 		let scrapeArr = [], giftsSent = false;
 		for (let object of giftsArr) {
 			if(object.scrape) {
 				scrapeArr.push(object.name);
-				customHeaderRequest.get(object.link, function(err, resp, body){
+				customHeaderRequest.get(object.link, (err, resp, body)=>{
 				  	let $ = cheerio.load(body);
-				  	$("div.inset").each(function(i, element) {
+				  	$("div.inset").each((i, element)=>{
 				    	let size = $(element).children("div.title").text(), price = $(element).children("div.subtitle").text();
 				    	if (size == object.size) {
 				    		price = parseFloat(price.substr(1).replace(/\,/g, ''));
 				    		object.sortPrice = price;
-							object.listPrice = "$" + price + " + s&h";
+							object.listPrice = `$${price} + s&h`;
 							scrapeArr = scrapeArr.filter(e => e !== object.name);
 							if (!scrapeArr.length) {
-								res.send(giftsArr);
 								giftsSent = true;
+								res.send(giftsArr);
 							};
-				  			console.log("price found for " + object.name);
-				  			console.log("$" + price);
+				  			console.log(`price found for ${object.name}:\n$${price}`);
 				      		return false;
 				    	}
 				  	});
