@@ -5,7 +5,7 @@ module.exports = (app)=>{
 
 	app.get("/api/gifts", function(req, res) {
 		console.log("gifts request received");
-		let scrapeArr = [];
+		let scrapeArr = [], giftsSent = false;
 		for (let object of giftsArr) {
 			if(object.scrape) {
 				scrapeArr.push(object.name);
@@ -18,7 +18,10 @@ module.exports = (app)=>{
 				    		object.sortPrice = price;
 							object.listPrice = "$" + price + " + s&h";
 							scrapeArr = scrapeArr.filter(e => e !== object.name);
-							if (!scrapeArr.length) { res.send(giftsArr); };
+							if (!scrapeArr.length) {
+								res.send(giftsArr);
+								giftsSent = true;
+							};
 				  			console.log("price found for " + object.name);
 				  			console.log("$" + price);
 				      		return false;
@@ -27,6 +30,7 @@ module.exports = (app)=>{
 				});
 			}
 		}
+		if (!scrapeArr.length && !giftsSent) { res.send(giftsArr); };
 	});
 
 };
