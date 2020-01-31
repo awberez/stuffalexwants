@@ -55,7 +55,7 @@ module.exports = [
 			link: "https://www.amazon.com/Nintendo-Switch-Neon-Blue-Joy%E2%80%91/dp/B07VGRJDFY/ref=sr_1_1?keywords=nintendo%2Bswitch&qid=1577222266&sr=8-1&th=1",
 			sortPrice: 299,
 			listPrice: "$299"},
-		{name: `adidas 4D Runner Pharrell Tech Olive (Size 10)`, 
+		{name: `4D Runner Pharrell Tech Olive (Size 10)`, 
 			image: "./images/4dpharrell.jpg", 
 			link: "https://stockx.com/adidas-4d-runner-pharrell-tech-olive",
 			size: 10,
@@ -90,5 +90,44 @@ module.exports = [
 			link: "https://store.brandonsanderson.com/search.php?mode=1&search_query_adv=leather-bound%20book&brand=&searchsubs=ON&price_from=100&price_to=100&featured=&shipping=&category%5B%5D=19&section=product",
 			sortPrice: 100,
 			listPrice: "$100 + s&h"},
-
+		{name: `Canadian $4 Fossilized Tyrannosaurus Rex Silver Coin`, 
+			image: "./images/silvertrex.jpg", 
+			link: "https://www.cdncoin.com/product-p/623932234291.htm",
+			sortPrice: 60,
+			listPrice: "$60 + s&h"},
+		{name: `Marabou Daim Chocolate Bar`, 
+			image: "./images/maraboudaim.jpg", 
+			link: "https://www.amazon.com/Marabou-Daim-Milk-Chocolate-King/dp/B00642BRGY",
+			sortPrice: 7.5,
+			listPrice: "$7.50"},
+		{name: `Jordan 1 Retro High Spider-Man Origin Story (Size 9.5)`, 
+			image: "./images/spidermanj1.jpg", 
+			link: "https://stockx.com/air-jordan-1-retro-high-chicago-crystal?size=9.5",
+			size: 9.5,
+			scrape: true},
+		{name: `Ultra Boost 2020 ISS US National Lab Tech Indigo (Size 10)`, 
+			image: "./images/issultraboost.jpg", 
+			link: "https://stockx.com/adidas-ultra-boost-2020-iss-us-national-lab-tech-indigo",
+			size: 10,
+			scrape: true},
 	]
+
+/* Gift Templates
+
+Scrape: 
+
+		{name: ``, 
+			image: "./images/", 
+			link: "",
+			size: ,
+			scrape: true},
+
+No Scrape: 
+
+		{name: ``, 
+			image: "./images/", 
+			link: "",
+			sortPrice: ,
+			listPrice: ""},
+
+*/
