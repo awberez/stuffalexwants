@@ -1,5 +1,6 @@
-const cheerio = require("cheerio"), request = require("request"), giftsArr = require("../gifts.js"),
+const cheerio = require("cheerio"), request = require("request"),
 customHeaderRequest = request.defaults({ headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'} });
+let  giftsArr = require("../gifts.js");
 
 module.exports = (app)=>{
 
@@ -9,23 +10,39 @@ module.exports = (app)=>{
 		for (let object of giftsArr) {
 			if(object.scrape) {
 				scrapeArr.push(object.name);
+				console.log(`getting price for ${object.name}`);
 				customHeaderRequest.get(object.link, (err, resp, body)=>{
+					console.log(`finding ${object.name} price`);
 				  	let $ = cheerio.load(body);
-				  	$("div.inset").each((i, element)=>{
-				    	let size = $(element).children("div.title").text(), price = $(element).children("div.subtitle").text();
-				    	if (size == object.size) {
-				    		price = parseFloat(price.substr(1).replace(/\,/g, ''));
-				    		object.sortPrice = price;
-							object.listPrice = `$${price} + s&h`;
-							scrapeArr = scrapeArr.filter(e => e !== object.name);
-							if (!scrapeArr.length) {
-								giftsSent = true;
-								res.send(giftsArr);
-							};
-				  			console.log(`price found for ${object.name}:\n$${price}`);
-				      		return false;
-				    	}
-				  	});
+				  	if ($("div.inset").children("div.title").text()) {
+					  	$("div.inset").each((i, element)=>{
+					  		console.log(`checking div ${i+1}`);
+					    	let size = $(element).children("div.title").text(), price = parseFloat($(element).children("div.subtitle").text().substr(1).replace(/\,/g, ''));
+					    	if (size == object.size && !isNaN(price)) {
+					    		object.sortPrice = price;
+								object.listPrice = `$${price} + s&h`;
+								scrapeArr = scrapeArr.filter(e => e !== object.name);
+								if (!scrapeArr.length) {
+									giftsSent = true;
+									res.send(giftsArr);
+								};
+					  			console.log(`price found for ${object.name}:\n$${price}`);
+					      		return false;
+					    	}
+					    	if (i == $("div.inset").length - 1 && scrapeArr.includes(object.name)) {
+					    		console.log("no price found");
+								scrapeArr = scrapeArr.filter(e => e !== object.name);
+					  			giftsArr = giftsArr.filter(el => el.name !== object.name);
+					  			if (!scrapeArr.length && !giftsSent) { res.send(giftsArr); };
+					    	}
+					  	}); 
+					}
+					else {
+						console.log("failed to retrieve price data");
+						scrapeArr = scrapeArr.filter(e => e !== object.name);
+			  			giftsArr = giftsArr.filter(el => el.name !== object.name);
+			  			if (!scrapeArr.length && !giftsSent) { res.send(giftsArr); };
+					};
 				});
 			}
 		}
