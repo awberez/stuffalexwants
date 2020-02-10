@@ -1,5 +1,4 @@
-const cheerio = require("cheerio"), request = require("request"),
-customHeaderRequest = request.defaults({ headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'} });
+const cheerio = require("cheerio"), request = require("request"), cloudscraper = require('cloudscraper');
 let  giftsArr = require("../gifts.js");
 
 module.exports = (app)=>{
@@ -17,7 +16,7 @@ module.exports = (app)=>{
 			if(object.scrape) {
 				scrapeArr.push(object.name);
 				console.log(`getting price for ${object.name}`);
-				customHeaderRequest.get(object.link, (err, resp, body)=>{
+				cloudscraper.get(object.link, (err, resp, body)=>{
 					clearTimeout(scrapeFail);
 					console.log(`finding ${object.name} price`);
 				  	let $ = cheerio.load(body);
