@@ -5,11 +5,9 @@ module.exports = (app)=>{
 
 	app.get("/api/gifts", (req, res)=>{
 		console.log("gifts request received");
-		let scrapeArr = [], giftsSent = false, scrapeFail;
+		let scrapeArr = [], scrapeFail;
 		scrapeFail = setTimeout(()=>{ 
-			for (let object of giftsArr) {
-				if(object.scrape) { giftsArr = giftsArr.filter(el => el.name !== object.name); }
-			};
+			for (let object of giftsArr) { if(object.scrape) { giftsArr = giftsArr.filter(el => el.name !== object.name); } };
 			res.send(giftsArr);
 		}, 10000);
 		for (let object of giftsArr) {
@@ -28,10 +26,7 @@ module.exports = (app)=>{
 					    		object.sortPrice = price;
 								object.listPrice = `$${price} + s&h`;
 								scrapeArr = scrapeArr.filter(e => e !== object.name);
-								if (!scrapeArr.length) {
-									giftsSent = true;
-									res.send(giftsArr);
-								};
+								if (!scrapeArr.length) { res.send(giftsArr); };
 					  			console.log(`price found for ${object.name}:\n$${price}`);
 					      		return false;
 					    	}
@@ -39,7 +34,7 @@ module.exports = (app)=>{
 					    		console.log("no price found");
 								scrapeArr = scrapeArr.filter(e => e !== object.name);
 					  			giftsArr = giftsArr.filter(el => el.name !== object.name);
-					  			if (!scrapeArr.length && !giftsSent) { res.send(giftsArr); };
+					  			if (!scrapeArr.length) { res.send(giftsArr); };
 					    	}
 					  	}); 
 					}
@@ -47,11 +42,13 @@ module.exports = (app)=>{
 						console.log("failed to retrieve price data");
 						scrapeArr = scrapeArr.filter(e => e !== object.name);
 			  			giftsArr = giftsArr.filter(el => el.name !== object.name);
-			  			if (!scrapeArr.length && !giftsSent) { res.send(giftsArr); };
+			  			if (!scrapeArr.length) { res.send(giftsArr); };
 					};
 				});
 			}
 		}
 	});
+
+
 
 };
