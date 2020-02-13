@@ -10,7 +10,7 @@ module.exports = (app)=>{
 		let scrapeArr = [], sendArr = [], giftsSent = false;
 		for (let object of giftsArr) { 
 			if (object.scrape) { 
-				object.index = giftsArr.indexOf(object);
+				object.key = giftsArr.indexOf(object);
 				scrapeArr.push(object);
 			}
 			else { sendArr.push(object); };
@@ -25,86 +25,87 @@ module.exports = (app)=>{
 		for (let object of scrapeArr) {
 			console.log(`getting price for ${object.name}`);
 			db.PriceList.findOne({
-		        where: { 
-		        	key: object.index,
-		        	name: object.name 
-		        }
+		        where: { key: object.key }
 		    }).then((dbGift)=>{
 		    	let d = new Date(), timeDif = 15 * 60 * 1000;
-		    	if (!dbGift || d.getTime() - timeDif > Date.parse(dbGift.updatedAt)) {
+		    	if (!dbGift || dbGift.name !== object.name || d.getTime() - timeDif > Date.parse(dbGift.updatedAt)) {
 		    		console.log(`scraping for ${object.name}`);
 					cloudscraper.get(object.link, (err, resp, body)=>{
-						console.log(`finding ${object.name} price`);
-					  	let $ = cheerio.load(body);
-					  	if ($("div.inset").children("div.title").text()) {
-						  	$("div.inset").each((i, element)=>{
-						    	let size = $(element).children("div.title").text(), price = parseFloat($(element).children("div.subtitle").text().substr(1).replace(/\,/g, ''));
-						    	if (size == object.size && !isNaN(price)) {
-						    		newPrice(object, price, sendArr);
+						if (!err && resp.statusCode == 200) {
+							console.log(`finding ${object.name} price`);
+						  	let $ = cheerio.load(body);
+						  	if ($("div.inset").children("div.title").text()) {
+							  	$("div.inset").each((i, element)=>{
+							    	let size = $(element).children("div.title").text(), price = parseFloat($(element).children("div.subtitle").text().substr(1).replace(/\,/g, ''));
+							    	if (size == object.size && !isNaN(price)) {
+							    		addGift(object, price);
+										console.log(`price found for ${object.name}:\n$${price}`);
+										savePrice(object.key, object.name, price, false);
+									    return false;	
+							    	}
+							    	else if (i == $("div.inset").length - 1) {
+							    		console.log("no price found");
+							    		savePrice(object.key, object.name, 0, true);
+							    	}
+							  	}); 
+							}
+							else if ($("span#priceblock_ourprice")) {
+								let price = parseFloat($("span#priceblock_ourprice").text().substr(1).replace(/\,/g, ''));
+								if (!isNaN(price)) {
+									addGift(object, price);
 									console.log(`price found for ${object.name}:\n$${price}`);
-									db.PriceList.upsert({
-										key: object.index,
-								        name: object.name,
-								        price: price,
-								        no_price: false
-								    }).then(()=>{
-								    	scrapeArr = scrapeArr.filter(e => e.index !== object.index), giftsSent = sendGifts(res, scrapeArr, sendArr, giftsSent);
-								    });
-								    return false;	
-						    	}
-						    	else if (i == $("div.inset").length - 1) {
-						    		console.log("no price found");
-						    		db.PriceList.upsert({
-										key: object.index,
-								        name: object.name,
-								        price: 0,
-								        no_price: true
-								    }).then(()=>{
-								    	scrapeArr = scrapeArr.filter(e => e.index !== object.index), giftsSent = sendGifts(res, scrapeArr, sendArr, giftsSent);
-								    });
-									return false;	
-						    	}
-						  	}); 
+									savePrice(object.key, object.name, price, false);
+								}
+								else {
+									console.log("no price found");
+							    	savePrice(object.key, object.name, 0, true);
+								};
+							}
+							else {
+								console.log("failed to locate price data");
+								savePrice(object.key, object.name, 0, true);
+							};
 						}
 						else {
-							console.log("failed to retrieve price data");
-							db.PriceList.upsert({
-								key: object.index,
-						        name: object.name,
-						        price: 0,
-						        no_price: true
-						    }).then(()=>{
-						    	scrapeArr = scrapeArr.filter(e => e.index !== object.index), giftsSent = sendGifts(res, scrapeArr, sendArr, giftsSent);
-						    });
-						};
+							console.log("error scraping site");
+							savePrice(object.key, object.name, 0, true);
+						}	
 					});
 				}
 				else {
 					console.log(`not scraping for ${object.name}`);
 			   		if (dbGift.no_price) {
-			   			scrapeArr = scrapeArr.filter(e => e.index !== object.index), giftsSent = sendGifts(res, scrapeArr, sendArr, giftsSent);
+			   			sendGifts(object.key);
 			   		}
 			   		else {
-			   			newPrice(object, dbGift.price, sendArr)
-						scrapeArr = scrapeArr.filter(e => e.index !== object.index), giftsSent = sendGifts(res, scrapeArr, sendArr, giftsSent);
+			   			addGift(object, dbGift.price)
+						sendGifts(object.key);
 			   		};
 		   		}
 		   	});
 		}
-	});
-
-	newPrice = (object, price, arr) => {
-		object.sortPrice = price, object.listPrice = `$${price} + s&h`;
-		arr.push(object);
-	}
-
-	sendGifts = (res, scrapeArr, sendArr, giftsSent) => {
-		if (!scrapeArr.length && !giftsSent) {
-			console.log("sending gifts");
-			res.send(sendArr); 
-			return true;
+		addGift = (object, price) => {
+			object.sortPrice = price, object.listPrice = object.link.includes("amazon") ? `$${price % 1 !== 0 ? price.toFixed(2) : price}` : `$${price} + s&h`;
+			sendArr.push(object);
 		}
-		else return false;
-	}
+		sendGifts = (key) => {
+			scrapeArr = scrapeArr.filter(e => e.key !== key)
+			if (!scrapeArr.length && !giftsSent) {
+				console.log("sending gifts");
+				res.send(sendArr); 
+				giftsSent = true;
+			}
+		}
+		savePrice = (key, name, price, no_price) => {
+			db.PriceList.upsert({
+				key: key,
+		        name: name,
+		        price: price,
+		        no_price: no_price
+		    }).then(()=>{
+		    	sendGifts(key);
+		    });
+		}
+	});
 
 };

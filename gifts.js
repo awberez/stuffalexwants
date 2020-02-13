@@ -33,18 +33,15 @@ module.exports = [
 		{name: `Stainless Steel Liquor Pour Spouts`, 
 			image: "./images/spouts.jpg", 
 			link: "https://www.amazon.com/Liquor-Pour-Spouts-Set-Stainless/dp/B01LW2L7R9?th=1",
-			sortPrice: 10,
-			listPrice: "$10"},
+			scrape: true},
 		{name: `Buffalo Wild Wings Mango Habanero Sauce`, 
 			image: "./images/bwwmango.jpg", 
 			link: "https://www.amazon.com/Buffalo-Wild-Wings-Sauce-Habanero/dp/B00D4XNNCM",
-			sortPrice: 15.5,
-			listPrice: "$15.50"},
+			scrape: true},
 		{name: `KitchenAid Pasta Roller Set`, 
 			image: "./images/roller.jpg", 
 			link: "https://www.amazon.com/KitchenAid-KSMPRA-3-Piece-Roller-Attachment/dp/B01DBGQR1K",
-			sortPrice: 139,
-			listPrice: "$139"},
+			scrape: true},
 		{name: `Air Max 1 Tinker Sketch to Shelf Black (Size 10)`, 
 			image: "./images/airmaxtinker.jpg", 
 			link: "https://stockx.com/nike-air-max-1-tinker-sketch-to-shelf-black",
@@ -53,8 +50,7 @@ module.exports = [
 		{name: `Nintendo Switch`, 
 			image: "./images/switch.jpg", 
 			link: "https://www.amazon.com/Nintendo-Switch-Neon-Blue-Joy%E2%80%91/dp/B07VGRJDFY/ref=sr_1_1?keywords=nintendo%2Bswitch&qid=1577222266&sr=8-1&th=1",
-			sortPrice: 299,
-			listPrice: "$299"},
+			scrape: true},
 		{name: `4D Runner Pharrell Tech Olive (Size 10)`, 
 			image: "./images/4dpharrell.jpg", 
 			link: "https://stockx.com/adidas-4d-runner-pharrell-tech-olive",
@@ -98,8 +94,7 @@ module.exports = [
 		{name: `Marabou Daim Chocolate Bar`, 
 			image: "./images/maraboudaim.jpg", 
 			link: "https://www.amazon.com/Marabou-Daim-Milk-Chocolate-King/dp/B00642BRGY",
-			sortPrice: 6,
-			listPrice: "$6.00"},
+			scrape: true},
 		{name: `Jordan 1 Retro High Spider-Man Origin Story (Size 9.5)`, 
 			image: "./images/spidermanj1.jpg", 
 			link: "https://stockx.com/air-jordan-1-retro-high-chicago-crystal?size=9.5",
@@ -114,7 +109,14 @@ module.exports = [
 
 /* Gift Templates
 
-Scrape: 
+Scrape Amazon: 
+
+		{name: ``, 
+			image: "./images/", 
+			link: "",
+			scrape: true},
+
+Scrape StockX: 
 
 		{name: ``, 
 			image: "./images/", 

@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     name: {type: DataTypes.STRING,
         allowNull: false,
     },
-    price: {type: DataTypes.INTEGER,
+    price: {type: DataTypes.FLOAT,
         allowNull: false,
     },
     no_price: {type: DataTypes.BOOLEAN,
