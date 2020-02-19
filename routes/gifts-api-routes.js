@@ -36,20 +36,26 @@ module.exports = (app)=>{
 							  	$("div.inset").each((i, element)=>{
 							    	let size = $(element).children("div.title").text(), price = parseFloat($(element).children("div.subtitle").text().substr(1).replace(/\,/g, ''));
 							    	if (size == object.size && !isNaN(price)) {
-										savePrice(object, price, `price found for ${object.name}:\n$${price}`);
+										savePrice(object, price);
 									    return false;	
 							    	}
-							    	else if (i == $("div.inset").length - 1) { savePrice(object, 0, "no price found"); };
+							    	else if (i == $("div.inset").length - 1) { savePrice(object, 0); };
 							  	}); 
 							}
 							else if ($("span#priceblock_ourprice")) {
 								let price = parseFloat($("span#priceblock_ourprice").text().substr(1).replace(/\,/g, ''));
-								if (!isNaN(price)) { savePrice(object, price, `price found for ${object.name}:\n$${price}`); }
-								else { savePrice(object, 0, "no price found"); };
+								if (!isNaN(price)) { savePrice(object, price); }
+								else { savePrice(object, 0); };
 							}
-							else { savePrice(object, 0, "failed to locate price data"); };
+							else { 
+								console.log("failed to locate price data");
+								savePrice(object, 0); 
+							};
 						}
-						else { savePrice(object, 0, "error scraping site"); };
+						else { 
+							console.log("error scraping site");
+							savePrice(object, 0); 
+						};
 					});
 				}
 				else {
@@ -62,9 +68,8 @@ module.exports = (app)=>{
 		   		}
 		   	});
 		}
-		savePrice = (object, price, message) => {
-			console.log(message);
-			if (price) { addGift(object, price); };
+		savePrice = (object, price) => {
+			price ? addGift(object, price) : console.log("no price found");
 			db.PriceList.upsert({
 				key: object.key,
 		        name: object.name,
@@ -73,6 +78,7 @@ module.exports = (app)=>{
 		};
 		addGift = (object, price) => {
 			object.sortPrice = price, object.listPrice = object.link.includes("amazon") ? `$${price % 1 !== 0 ? price.toFixed(2) : price}` : `$${price} + s&h`;
+			console.log(`price found for ${object.name}:\n${object.listPrice}`);
 			sendArr.push(object);
 		};
 		sendGifts = (key) => {
