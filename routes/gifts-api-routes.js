@@ -36,29 +36,25 @@ module.exports = (app)=>{
 							  	$("div.inset").each((i, element)=>{
 							    	let size = $(element).children("div.title").text(), price = parseFloat($(element).children("div.subtitle").text().substr(1).replace(/\,/g, ''));
 							    	if (size == object.size && !isNaN(price)) {
-							    		addGift(object, price);
-										savePrice(object.key, object.name, price, false, `price found for ${object.name}:\n$${price}`);
+										savePrice(object, price, `price found for ${object.name}:\n$${price}`);
 									    return false;	
 							    	}
-							    	else if (i == $("div.inset").length - 1) { savePrice(object.key, object.name, 0, true, "no price found"); };
+							    	else if (i == $("div.inset").length - 1) { savePrice(object, 0, "no price found"); };
 							  	}); 
 							}
 							else if ($("span#priceblock_ourprice")) {
 								let price = parseFloat($("span#priceblock_ourprice").text().substr(1).replace(/\,/g, ''));
-								if (!isNaN(price)) {
-									addGift(object, price);
-									savePrice(object.key, object.name, price, false, `price found for ${object.name}:\n$${price}`);
-								}
-								else { savePrice(object.key, object.name, 0, true, "no price found"); };
+								if (!isNaN(price)) { savePrice(object, price, `price found for ${object.name}:\n$${price}`); }
+								else { savePrice(object, 0, "no price found"); };
 							}
-							else { savePrice(object.key, object.name, 0, true, "failed to locate price data"); };
+							else { savePrice(object, 0, "failed to locate price data"); };
 						}
-						else { savePrice(object.key, object.name, 0, true, "error scraping site"); };
+						else { savePrice(object, 0, "error scraping site"); };
 					});
 				}
 				else {
 					console.log(`not scraping for ${object.name}`);
-			   		if (dbGift.no_price) { sendGifts(object.key); }
+			   		if (!dbGift.price) { sendGifts(object.key); }
 			   		else {
 			   			addGift(object, dbGift.price);
 						sendGifts(object.key);
@@ -66,6 +62,15 @@ module.exports = (app)=>{
 		   		}
 		   	});
 		}
+		savePrice = (object, price, message) => {
+			console.log(message);
+			if (price) { addGift(object, price); };
+			db.PriceList.upsert({
+				key: object.key,
+		        name: object.name,
+		        price: price
+		    }).then(()=>{ sendGifts(object.key); });
+		};
 		addGift = (object, price) => {
 			object.sortPrice = price, object.listPrice = object.link.includes("amazon") ? `$${price % 1 !== 0 ? price.toFixed(2) : price}` : `$${price} + s&h`;
 			sendArr.push(object);
@@ -77,15 +82,6 @@ module.exports = (app)=>{
 				res.send(sendArr); 
 				giftsSent = true;
 			}
-		};
-		savePrice = (key, name, price, no_price, message) => {
-			console.log(message);
-			db.PriceList.upsert({
-				key: key,
-		        name: name,
-		        price: price,
-		        no_price: no_price
-		    }).then(()=>{ sendGifts(key); });
 		};
 	});
 

@@ -16,10 +16,6 @@ module.exports = function(sequelize, DataTypes) {
     price: {type: DataTypes.FLOAT,
         allowNull: false,
     },
-    no_price: {type: DataTypes.BOOLEAN,
-        defaultValue: false,
-        allowNull: false,
-    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   });
