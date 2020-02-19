@@ -25,7 +25,7 @@ module.exports = (app)=>{
 		for (let object of scrapeArr) {
 			console.log(`getting price for ${object.name}`);
 			db.PriceList.findOne({ where: { key: object.key } }).then((dbGift)=>{
-		    	let d = new Date(), timeDif = 15 * 60 * 1000;
+		    	let d = new Date(), timeDif = 30 * 60 * 1000;
 		    	if (!dbGift || dbGift.name !== object.name || d.getTime() - timeDif > Date.parse(dbGift.updatedAt)) {
 		    		console.log(`scraping for ${object.name}`);
 					cloudscraper.get(object.link, (err, resp, body)=>{
