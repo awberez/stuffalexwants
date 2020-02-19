@@ -6,8 +6,8 @@ $(function(){
 		console.log("gifts request sent");
 		apiDelay = setTimeout(()=>{ 
 			$(contentDivs).html(`<p>Experiencing abnormal delays retrieving content...</p>`);
-			apiDelay = setTimeout(()=>{ $(contentDivs).html(`<p>Please refresh your browser or try visiting StuffAlexWants.com at a later time.</p>`); }, 10000);
-		}, 5000);
+			apiDelay = setTimeout(()=>{ $(contentDivs).html(`<p>Please refresh your browser or try visiting StuffAlexWants.com at a later time.</p>`); }, 8000);
+		}, 7000);
 		$.get("/api/gifts", (res)=>{ 
 			clearTimeout(apiDelay);
 			displayGifts(quickSort(res)); 

@@ -4,9 +4,8 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
-var env       = process.env.RDS_USERNAME || 'development';
+var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.js')[env];
-console.log(config)
 var db        = {};
 
 if (config.use_env_variable) {

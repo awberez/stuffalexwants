@@ -14,7 +14,7 @@
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  "admin": {
+  "production": {
     "username": process.env.RDS_USERNAME,
     "password": process.env.RDS_PASSWORD,
     "database": process.env.RDS_DB_NAME,
