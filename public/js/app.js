@@ -18,13 +18,13 @@ $(function(){
 		console.log(`displaying ${arr.length} gifts`)
 		$(contentDivs).empty();
 		for (let gift of arr) {
-			$(gift.sortPrice <= 25 
+			$(gift.sortPrice < 25 
 				? "#budgetContent" 
-				: gift.sortPrice <= 75
+				: gift.sortPrice < 75
 					? "#goodContent"
-					: gift.sortPrice <= 250
+					: gift.sortPrice < 250
 						? "#highContent"
-						: gift.sortPrice <= 750
+						: gift.sortPrice < 750
 							? "#bigContent"
 							: "#grailContent")
 			.append(`
