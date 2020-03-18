@@ -33,6 +33,7 @@ $(function(){
 						<div class="col-lg-8">
 							<h4>${gift.name}</h4>
 							<h5>${gift.listPrice} - <a href=${gift.link} target="blank">Available here</a></h5>
+							<p>${gift.quote}</p>
 						</div>
 						<div class="col-lg-4">
 							<a href=${gift.link} target="blank">
