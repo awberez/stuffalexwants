@@ -49,6 +49,11 @@ module.exports = (app)=>{
 									console.log("checking sale price");
 									let price = parseFloat($("span#priceblock_pospromoprice").text().substr(1).replace(/\,/g, ''));
 									if (!isNaN(price)) { savePrice(object, price, `price found for ${object.name}:\n$${price}`); }
+									else if ($("span#priceblock_saleprice")) {
+										let price = parseFloat($("span#priceblock_saleprice").text().substr(1).replace(/\,/g, ''));
+										if (!isNaN(price)) { savePrice(object, price, `price found for ${object.name}:\n$${price}`); }
+										else { savePrice(object, 0, "no price found"); };
+									}
 									else { savePrice(object, 0, "no price found"); };
 								}
 								else { savePrice(object, 0, "no price found"); };
