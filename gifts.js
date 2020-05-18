@@ -147,7 +147,7 @@ module.exports = [
 			image: "./images/transmitter.jpg", 
 			link: "https://www.amazon.com/HomeSpot-Bluetooth-Transmitter-Compatible-Headphones/dp/B07L9SL7ZT/",
 			scrape: true,
-			quote: ""},
+			quote: `There's no such thing as "too many gaming accessories".`},
 	]
 
 /* Gift Templates
