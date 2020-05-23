@@ -142,7 +142,7 @@ module.exports = [
 			link: "https://regalrobot.com/shop/star-wars/starwars-art-sculpture-decor/mythosaur-skull-mandalorian-wall-decor/",
 			sortPrice: 275,
 			listPrice: "$275 + s&h",
-			quote: "Someday, I will have a fireplace. Above that fireplace, this."},
+			quote: "Someday, I will have a fireplace. Above that fireplace: this."},
 		{name: `Switch Bluetooth Transmitter`, 
 			image: "./images/transmitter.jpg", 
 			link: "https://www.amazon.com/HomeSpot-Bluetooth-Transmitter-Compatible-Headphones/dp/B07L9SL7ZT/",

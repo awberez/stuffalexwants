@@ -12,7 +12,7 @@ $(function(){
 			clearTimeout(apiDelay);
 			displayGifts(quickSort(res)); 
 		});
-	}
+	};
 
 	displayGifts = (arr)=>{
 		console.log(`displaying ${arr.length} gifts`)
@@ -42,9 +42,9 @@ $(function(){
 						</div>
 					</div>
 				</div>
-			`)
-		}
-	}
+			`);
+		};
+	};
 
 	quickSort = (origArr)=>{
 		if (origArr.length <= 1) { return origArr; } 
@@ -52,8 +52,8 @@ $(function(){
 			let left = [], right = [], newArr = [], pivot = origArr.pop(), length = origArr.length;
 			for (let i = 0; i < length; i++) { origArr[i].sortPrice <= pivot.sortPrice ? left.push(origArr[i]) : right.push(origArr[i]); }
 			return newArr.concat(quickSort(left), pivot, quickSort(right));
-		}
-	}
+		};
+	};
 
 	getGifts();
 
