@@ -143,10 +143,11 @@ module.exports = [
 			sortPrice: 275,
 			listPrice: "$275 + s&h",
 			quote: "Someday, I will have a fireplace. Above that fireplace: this."},
-		{name: `Switch Bluetooth Transmitter`, 
-			image: "./images/transmitter.jpg", 
-			link: "https://www.amazon.com/HomeSpot-Bluetooth-Transmitter-Compatible-Headphones/dp/B07L9SL7ZT/",
-			scrape: true,
+		{name: `Satisfye Switch Grip`, 
+			image: "./images/satisfye.jpg", 
+			link: "https://www.satisfye.com/products/zengrip-pro",
+			sortPrice: 25,
+			listPrice: "$25",
 			quote: `There's no such thing as "too many gaming accessories".`},
 	]
 
