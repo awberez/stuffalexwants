@@ -20,7 +20,7 @@ module.exports = [
 			quote: "I'd eat here every night if I could afford that much mercury."},
 		{name: `Pyritized Ammonite`, 
 			image: "./images/ammonite.jpg", 
-			link: "https://davesrockshop.com/pyritized-ammonites-holzmaden-germany.html",
+			link: "https://davesrockshop.com/catalog/product/view/id/3440/s/pyritized-ammonites-holzmaden-germany/",
 			sortPrice: 62.5,
 			listPrice: "$62.50",
 			quote: "It's a fool's gold fossil. How awesome is that?"},
@@ -146,9 +146,15 @@ module.exports = [
 		{name: `Satisfye Slim Grip Case for Nintendo Switch`, 
 			image: "./images/satisfyecase.jpg", 
 			link: "https://www.satisfye.com/collections/stuck-at-home/products/slim-grip-case",
-			sortPrice: 23,
-			listPrice: "$23",
+			sortPrice: 26,
+			listPrice: "$26",
 			quote: `There's no such thing as "too many gaming accessories".`},
+		{name: `Honeycomb Pan`, 
+			image: "./images/beepan.jpg", 
+			link: "https://shop.kingarthurflour.com/items/honeycomb-pan",
+			sortPrice: 40,
+			listPrice: "$40 + s&h",
+			quote: "Bee cakes!"},
 	]
 
 /* Gift Templates
