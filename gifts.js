@@ -87,7 +87,7 @@ module.exports = [
 			sortPrice: 90,
 			listPrice: "$90",
 			quote: "An iconic artist's take on an iconic Magic: the Gathering card."},
-		{name: `Brandon Sanderson Leather-bound Book (Any Title)`, 
+		{name: `Brandon Sanderson Leather-bound Book (Warbreaker, Well of Ascension, or The Hero of Ages)`, 
 			image: "./images/leatherbook.jpg", 
 			link: "https://store.brandonsanderson.com/search.php?mode=1&search_query_adv=leather-bound%20book&brand=&searchsubs=ON&price_from=100&price_to=100&featured=&shipping=&category%5B%5D=19&section=product",
 			sortPrice: 100,
