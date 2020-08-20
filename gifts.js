@@ -154,7 +154,7 @@ module.exports = [
 			link: "https://www.wayfair.com/decor-pillows/pdp/breakwater-bay-rocket-non-skid-bookends-bkwt7943.html",
 			sortPrice: 163,
 			listPrice: "$163",
-			quote: ""},
+			quote: "The perfect way to display my sci-fi and fantasy books."},
 		{name: `adidas Consortium Runner V2 4D`, 
 			image: "./images/4drunner.jpg", 
 			link: "https://stockx.com/adidas-consortium-runner-v2-4d-collegiate-navy",
