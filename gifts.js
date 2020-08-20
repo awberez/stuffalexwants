@@ -155,7 +155,7 @@ module.exports = [
 			sortPrice: 163,
 			listPrice: "$163",
 			quote: "The perfect way to display my sci-fi and fantasy books."},
-		{name: `adidas Consortium Runner V2 4D`, 
+		{name: `adidas Consortium Runner V2 4D (Size 9.5)`, 
 			image: "./images/4drunner.jpg", 
 			link: "https://stockx.com/adidas-consortium-runner-v2-4d-collegiate-navy",
 			size: 9.5,
