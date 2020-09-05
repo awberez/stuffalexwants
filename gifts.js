@@ -15,8 +15,8 @@ module.exports = [
 		{name: `Dinner at Sushi Taku`, 
 			image: "./images/sushitaku.jpg", 
 			link: "http://www.sushitaku.com",
-			sortPrice: 33,
-			listPrice: "~$33/person (after tax & tip)",
+			sortPrice: 36,
+			listPrice: "~$36/person (after tax & tip)",
 			quote: "I'd eat here every night if I could afford that much mercury."},
 		{name: `Pyritized Ammonite`, 
 			image: "./images/ammonite.jpg", 
@@ -86,7 +86,7 @@ module.exports = [
 			link: "https://store.brandonsanderson.com/search.php?mode=1&search_query_adv=leather-bound%20book&brand=&searchsubs=ON&price_from=100&price_to=100&featured=&shipping=&category%5B%5D=19&section=product",
 			sortPrice: 100,
 			listPrice: "$100 + s&h",
-			quote: "If I'm going to fill my library with fancy leather books, I'm starting with the works of my favorite author."},
+			quote: "Filling my library with fancy leather books, starting with the works of my favorite author."},
 		{name: `Canadian $4 Fossilized Tyrannosaurus Rex Silver Coin`, 
 			image: "./images/silvertrex.jpg", 
 			link: "http://www.londoncoincentreinc.com/canada-2009-4-tyrannosaurus-rex-dinosaur-skeleton-pure-silver-coin/",
@@ -161,6 +161,12 @@ module.exports = [
 			size: 9.5,
 			scrape: true,
 			quote: "3D printed shoes. The future is now!"},
+		{name: `Leather-bound Foundation Trilogy`, 
+			image: "./images/asimov.jpg", 
+			link: "https://www.eastonpress.com/deluxe-editions/isaac-asimovs-the-foundation-trilogy-a-signed-edition-3230.html",
+			sortPrice: 395,
+			listPrice: "$395",
+			quote: "A timeless classic given a deluxe upgrade."},
 	]
 
 /* Gift Templates
